@@ -22,7 +22,7 @@ Bringing everything together, we'll take our (minimal) Console App code, bake it
 
 ### Code sample
 
-to do  
+🧑‍💻 [Click to go to Repository](code/)  
 
 ### Links from presentation
 
@@ -31,13 +31,17 @@ to do
 🔽 [Download Ollama](https://ollama.com/download)  
 
 **.NET**  
-🧑‍💻 [.NET website](https://dotnet.microsoft.com/en-us/?WT.mc_id=MVP_307078)  
+🌐 [.NET website](https://dotnet.microsoft.com/en-us/?WT.mc_id=MVP_307078)  
 🤖 [Microsoft Learn: Microsoft.Extensions.AI libraries](https://learn.microsoft.com/en-us/dotnet/ai/microsoft-extensions-ai?WT.mc_id=MVP_307078)  
 🦙 [GitHub: OllamaSharp](https://github.com/awaescher/OllamaSharp)  
 
 **Visual Studio Dev Tunnels**  
 🗺️ [Microsoft Learn: Visual Studio Dev Tunnels](https://learn.microsoft.com/en-us/aspnet/core/test/dev-tunnels?WT.mc_id=MVP_307078)  
 🖥️ [Microsoft Learn: Dev Tunnels command-line reference](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/cli-commands?WT.mc_id=MVP_307078)  
+
+**Further reading**  
+Presentation flow based in part on this Microsoft Learn article..  
+📖 [Microsoft Learn: Chat with a local AI model using .NET](https://learn.microsoft.com/en-us/dotnet/ai/quickstarts/chat-local-model?WT.mc_id=MVP_307078)  
 
 ---
 For more info, find / contact me at:  

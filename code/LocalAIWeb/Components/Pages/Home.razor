@@ -1,0 +1,143 @@
+﻿@page "/"
+@using Microsoft.Extensions.AI
+@using LocalAIWeb.Services
+@inject ChatService ChatService
+@inject IJSRuntime JS
+
+<PageTitle>LocalAI Chat</PageTitle>
+
+<div class="chat-container">
+    <div class="chat-header">
+        <h3>LocalAI Chat</h3>
+        <button class="btn-clear" @onclick="ClearChat" title="Clear chat">Clear</button>
+    </div>
+
+    <div class="chat-messages" @ref="messagesContainer">
+        @if (messages.Count == 0)
+        {
+            <div class="empty-state">
+                <p>Start a conversation with your local AI</p>
+            </div>
+        }
+        else
+        {
+            @foreach (var msg in messages)
+            {
+                <div class="message @(msg.IsUser ? "user" : "assistant")">
+                    <div class="message-role">@(msg.IsUser ? "You" : "AI")</div>
+                    <div class="message-content">@msg.Text</div>
+                </div>
+            }
+        }
+    </div>
+
+    <div class="chat-input">
+        <textarea @bind="userInput"
+                  @bind:event="oninput"
+                  @onkeydown="HandleKeyDown"
+                  placeholder="Type your message..."
+                  disabled="@isStreaming"
+                  rows="2"></textarea>
+        <button class="btn-send" @onclick="SendMessage" disabled="@(isStreaming || string.IsNullOrWhiteSpace(userInput))">
+            @if (isStreaming)
+            {
+                <span>...</span>
+            }
+            else
+            {
+                <span>Send</span>
+            }
+        </button>
+    </div>
+</div>
+
+@code {
+    private List<ChatMessageDisplay> messages = [];
+    private string userInput = "";
+    private bool isStreaming;
+    private ElementReference messagesContainer;
+
+    private async Task HandleKeyDown(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter" && !e.ShiftKey && !isStreaming && !string.IsNullOrWhiteSpace(userInput))
+        {
+            await SendMessage();
+        }
+    }
+
+    private async Task SendMessage()
+    {
+        if (string.IsNullOrWhiteSpace(userInput) || isStreaming)
+            return;
+
+        var systemPrompt = "";
+
+        // Example System Prompt to keep things short
+        systemPrompt =
+            "You are a helpful assistant. Please provide concise and clear answers." +
+            "Please answer in less than 100 words." + Environment.NewLine +
+            Environment.NewLine;
+
+        var prompt = userInput.Trim();
+
+        var promptForLLM = systemPrompt + prompt;
+
+        userInput = "";
+        isStreaming = true;
+
+        messages.Add(new ChatMessageDisplay(prompt, true));
+        messages.Add(new ChatMessageDisplay("", false));
+        var assistantMessage = messages[^1];
+
+        await ScrollToBottom();
+
+        try
+        {
+            await foreach (var token in ChatService.SendMessageAsync(promptForLLM))
+            {
+                assistantMessage.Text += token;
+                StateHasChanged();
+                await ScrollToBottom();
+            }
+        }
+        catch (Exception ex)
+        {
+            assistantMessage.Text = $"Error: {ex.Message}";
+        }
+        finally
+        {
+            isStreaming = false;
+            StateHasChanged();
+        }
+    }
+
+    private void ClearChat()
+    {
+        messages.Clear();
+        ChatService.ClearHistory();
+    }
+
+    private async Task ScrollToBottom()
+    {
+        try
+        {
+            await JS.InvokeVoidAsync("scrollToBottom", messagesContainer);
+        }
+        catch
+        {
+            // Ignore JS interop errors during prerendering
+        }
+    }
+
+    private class ChatMessageDisplay
+    {
+        public string Text { get; set; }
+        public bool IsUser { get; }
+
+        public ChatMessageDisplay(string text, bool isUser)
+        {
+            Text = text;
+            IsUser = isUser;
+        }
+    }
+}
