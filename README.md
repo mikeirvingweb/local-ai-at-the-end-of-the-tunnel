@@ -18,6 +18,8 @@ Bringing everything together, we'll take our (minimal) Console App code, bake it
 ## Forthcoming Talks
 📅 Sep 15th 2026 - **Manchester Statistical Society** - [Meetup](https://www.meetup.com/manchester-statistical-society-meetup-group/events/316197445/)  
 
+📅 Nov 21st 2026 - **Northern Ireland Developer Conference** - [Website](https://nidevconf.com/)  
+
 ## Past Talks  
 📅 Jul 22nd 2026 - **Macc Tech** - [Website](https://www.macctech.co.uk/events/20260722) - [Slides](https://mikeirvingweb.s3.eu-west-2.amazonaws.com/local-ai-at-the-end-of-the-tunnel/presentations/2026/2026-07-22-macc-tech/Mike-Irving-Local-AI-at-the-End-of-the-Tunnel.pptx)    
 
