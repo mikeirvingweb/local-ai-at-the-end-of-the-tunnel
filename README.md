@@ -16,7 +16,7 @@ Bringing everything together, we'll take our (minimal) Console App code, bake it
 ![Local AI at the End of the Tunnel](local-ai-at-the-end-of-the-tunnel.png)
 
 ## Forthcoming Talks
-📅 Sep 15th 2026 - **Manchester Statistical Society** - [Meetup](https://www.meetup.com/manchester-statistical-society-meetup-group/events/316197445/)  
+📅 Sep 15th 2026 - **Manchester Statistical Society** - [Meetup](https://www.meetup.com/manchester-statistical-society-meetup-group/events/316197445/) - [Slides](https://mikeirvingweb.s3.eu-west-2.amazonaws.com/local-ai-at-the-end-of-the-tunnel/presentations/2026/2026-09-15-manchester-statistical-society/Mike-Irving-Local-AI-at-the-End-of-the-Tunnel.pptx)  
 
 📅 Nov 21st 2026 - **Northern Ireland Developer Conference** - [Website](https://nidevconf.com/)  
 
